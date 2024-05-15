@@ -1,0 +1,19 @@
+---
+
+- name: Move Cisco Secure Endpoint debian 12 installer to /tmp
+  ansible.builtin.file:
+    src: amp_debian_12.deb
+    dest: "{{ install_csc_debian_file }}"
+    owner: root
+    group: root
+    mode: '0700'
+  when: ansible_distribution_version is match("^12") or ansible_distribution_version is match("^2")
+
+- name: Move Cisco Secure Endpoint debian 11 installer to /tmp
+  ansible.builtin.file:
+    src: amp_debian_11.deb
+    dest: "{{ install_csc_debian_file }}"
+    owner: root
+    group: root
+    mode: '0700'
+  when: ansible_distribution_version is match("^11") or ansible_distribution_version is match("^10") or ansible_distribution_version is match("^18")
