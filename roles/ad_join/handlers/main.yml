@@ -1,0 +1,13 @@
+---
+
+- name: Restart sssd
+  ansible.builtin.service:
+    name: sssd.service
+    state: restarted
+    enabled: true
+
+- name: Restart sshd
+  ansible.builtin.service:
+    name: sshd.service
+    state: restarted
+    enabled: true
