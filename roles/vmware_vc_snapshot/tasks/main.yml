@@ -1,0 +1,16 @@
+---
+
+- name: Take snapshot
+  community.vmware.vmware_guest_snapshot:
+    username: '{{ vmware_vc_snapshot_username }}'
+    password: '{{ vvmware_vc_snapshot_password }}'
+    hostname: '{{ vmware_vc_snapshot_hostname }}'
+    datacenter: '{{ vmware_vc_snapshot_datacenter }}'
+    folder: '{{ vmware_vc_snapshot_vm_folder }}'
+    name: '{{ vmware_vc_snapshot_vm_name }}'
+    state: present
+    snapshot_name: '{{ vmware_vc_snapshot_name }}'
+    description: '{{ vmware_vc_snapshot_description }}'
+    memory_dump: false
+    validate_certs: false
+  delegate_to: localhost
