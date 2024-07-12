@@ -1,5 +1,0 @@
----
-# vars file for install_csc
-
-install_csc_debian_file: '/tmp/amp.deb'
-install_csc_rhel_file: '/tmp/amp.rpm'

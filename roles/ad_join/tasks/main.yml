@@ -14,9 +14,9 @@
      rhel.yml
   when: ansible_os_family == 'RedHat'
 
-- name: Join to txtgroup.com domain
+- name: Domain join
   ansible.builtin.expect:
-     command: /bin/bash -c "/usr/sbin/realm join txtgroup.com -U {{ ad_join_domain_admin }}"
+     command: /bin/bash -c "/usr/sbin/realm join {{ ad_join_domain_name }} -U {{ ad_join_domain_admin }} --install=/"
      responses:
         Password for*: "{{ ad_join_domain_admin_password }}"
 
@@ -46,5 +46,5 @@
      validate: '/usr/sbin/visudo -cf %s'
   loop:
      - "{{ ad_join_domain_admin }} ALL=(ALL:ALL) ALL"
-     - "{{ ansible_facts['ansible_nodename'] }}_LA"
+     - "{{ ansible_hostname }}_LA ALL=(ALL:ALL) ALL"
   notify: Restart sshd
