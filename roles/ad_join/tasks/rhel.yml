@@ -13,6 +13,6 @@
     state: present
 
 - name: Enable home directory
-  ansible.builtin.command: /bin/bash -c "authselect select sssd with-mkhomedir --force"
+  ansible.builtin.command: /bin/bash -c "/usr/bin/authselect select sssd with-mkhomedir --force"
   register: home_folder
   changed_when: home_folder != ""
