@@ -1,0 +1,8 @@
+---
+
+- name: Debian Updates
+  ansible.builtin.apt:
+    autoclean: true
+    update_cache: true
+    upgrade: dist
+    autoremove: true
