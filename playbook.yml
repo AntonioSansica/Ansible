@@ -1,0 +1,9 @@
+---
+- name: Add Host
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Use role
+      ansible.builtin.import_role:
+        name: add_host_zabbix

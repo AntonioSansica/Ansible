@@ -1,0 +1,19 @@
+---
+
+- name: Create a new host in Zabbix
+  delegate_to: monitoring.txtgroup.com
+  community.zabbix.zabbix_host:
+    host_name: "{{ add_host_zabbix_hostname }}"
+    host_groups:
+      - "{{ add_host_zabbix_group }}"
+    link_templates:
+      - "{{ add_host_zabbix_template }}"
+      - "Template OS Linux"
+    interfaces:
+      - type: 1
+        main: 1
+        useip: 1
+        ip: "{{ add_host_zabbix_ip }}"
+        dns: ""
+        port: "10050"
+    state: present

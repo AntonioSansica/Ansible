@@ -1,0 +1,13 @@
+ansible_network_os: community.zabbix.zabbix
+ansible_httpapi_port: 443
+ansible_connection: httpapi
+ansible_httpapi_use_ssl: true
+ansible_httpapi_validate_certs: false
+ansible_user: "ansible"
+ansible_httpapi_pass: "P^Dr!uj9U;d3"
+ansible_zabbix_url_path: "/" 
+
+add_host_zabbix_hostname: "ESTXDSRLV117"
+add_host_zabbix_group: "TXD (DATA CENTER)"
+add_host_zabbix_template: "Template ICMP Ping"
+add_host_zabbix_ip: "10.150.0.117"
