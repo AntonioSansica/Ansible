@@ -1,6 +1,6 @@
 ---
 
-- name: Move  debian installer to /tmp
+- name: Move debian installer to /tmp
   ansible.builtin.import_tasks:
     debian.yml
   when: ansible_os_family == 'Debian'

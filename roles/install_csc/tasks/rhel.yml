@@ -1,8 +1,8 @@
 ---
 
 - name: Move Cisco Secure Endpoint rhel 9 installer to /tmp
-  ansible.builtin.copy:
-    src: files/amp_rhel_9.rpm
+  ansible.builtin.get_url:
+    url: "{{ install_csc_rhel_9_url }}"
     dest: "{{ install_csc_rhel_file }}"
     owner: root
     group: root
@@ -10,8 +10,8 @@
   when: ansible_distribution_version is match("^9")
 
 - name: Move Cisco Secure Endpoint rhel 8 installer to /tmp
-  ansible.builtin.copy:
-    src: files/amp_rhel_8.rpm
+  ansible.builtin.get_url:
+    url: "{{ install_csc_rhel_8_url }}"
     dest: "{{ install_csc_rhel_file }}"
     owner: root
     group: root
@@ -19,8 +19,8 @@
   when: ansible_distribution_version is match("^8")
 
 - name: Move Cisco Secure Endpoint rhel 7 installer to /tmp
-  ansible.builtin.copy:
-    src: files/amp_rhel_7.rpm
+  ansible.builtin.get_url:
+    url: "{{ install_csc_rhel_7_url }}"
     dest: "{{ install_csc_rhel_file }}"
     owner: root
     group: root
