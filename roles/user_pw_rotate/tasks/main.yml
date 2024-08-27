@@ -13,5 +13,5 @@
     name: "{{ user_pw_rotate_target }}"
     password: "{{ new_password.stdout | password_hash('sha512') }}"
 
-- name: Append the new password and hostname to the file on Ansible Node
+- name: Use savepw task
   ansible.builtin.include_tasks: savepw.yml
