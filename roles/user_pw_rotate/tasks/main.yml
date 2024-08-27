@@ -1,0 +1,17 @@
+---
+
+- name: Gen the new password
+  delegate_to: localhost
+  ansible.builtin.command:
+    openssl rand -base64 18
+  register: new_password
+  no_log: true
+  changed_when: true
+
+- name: Set the new password
+  ansible.builtin.user:
+    name: "{{ user_pw_rotate_target }}"
+    password: "{{ new_password.stdout | password_hash('sha512') }}"
+
+- name: Append the new password and hostname to the file on Ansible Node
+  ansible.builtin.include_tasks: savepw.yml

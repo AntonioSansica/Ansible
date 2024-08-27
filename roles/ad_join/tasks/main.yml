@@ -1,0 +1,50 @@
+---
+
+- name: Load AD admin credentials
+  ansible.builtin.include_vars:
+     main.yml
+
+- name: Install required packages for Debian
+  ansible.builtin.import_tasks:
+     debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Install required packages for RHEL
+  ansible.builtin.import_tasks:
+     rhel.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Domain join
+  ansible.builtin.expect:
+     command: /bin/bash -c "/usr/sbin/realm join {{ ad_join_domain_name }} -U {{ ad_join_domain_admin }} --install=/"
+     responses:
+        Password for*: "{{ ad_join_domain_admin_password }}"
+
+- name: Join check
+  ansible.builtin.command: /bin/bash -c "/usr/sbin/realm list"
+  register: realm_check
+  changed_when: realm_check != ""
+
+- name: Join debug
+  ansible.builtin.debug:
+     msg: "{{ realm_check.stdout }}"
+
+- name: Copy sssd.conf
+  ansible.builtin.template:
+     src: sssd.conf.j2
+     dest: /etc/sssd/sssd.conf
+     owner: root
+     group: root
+     mode: '0600'
+  notify: Restart sssd
+
+- name: Grant sudo privileges
+  ansible.builtin.lineinfile:
+     path: /etc/sudoers
+     line: "{{ item }}"
+     state: present
+     validate: '/usr/sbin/visudo -cf %s'
+  loop:
+     - "{{ ad_join_domain_admin }} ALL=(ALL:ALL) ALL"
+     - "{{ ansible_hostname }}_LA ALL=(ALL:ALL) ALL"
+  notify: Restart sshd

@@ -1,0 +1,4 @@
+*.cfg
+hosts
+playbook.yml
+.vscode

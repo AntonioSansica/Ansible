@@ -1,0 +1,7 @@
+---
+
+- name: RHEL Updates
+  ansible.builtin.dnf:
+    update_cache: true
+    update_only: false
+    autoremove: true

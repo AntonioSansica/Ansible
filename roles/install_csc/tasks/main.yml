@@ -1,0 +1,24 @@
+---
+
+- name: Move debian installer to /tmp
+  ansible.builtin.import_tasks:
+    debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Move Cisco Secure Endpoint rhel installer to /tmp
+  ansible.builtin.import_tasks:
+    rhel.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Install Cisco Secure Endpoint
+  ansible.builtin.apt:
+    deb: "{{ install_csc_debian_file }}"
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Install Cisco Secure Endpoint
+  ansible.builtin.dnf:
+    name: "{{ install_csc_rhel_file }}"
+    state: present
+    disable_gpg_check: true
+  when: ansible_os_family == 'RedHat'

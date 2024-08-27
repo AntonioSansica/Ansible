@@ -1,0 +1,10 @@
+---
+# vars file for install_csc
+install_csc_debian_12_url: ""
+install_csc_debian_11_url: ""
+install_csc_rhel_9_url: ""
+install_csc_rhel_8_url: ""
+install_csc_rhel_7_url: ""
+
+install_csc_debian_file: '/tmp/amp.deb'
+install_csc_rhel_file: '/tmp/amp.rpm'

@@ -1,0 +1,16 @@
+---
+
+vmware_vc_add_vm_vcenter_username:
+vmware_vc_add_vm_vcenter_password:
+vmware_vc_add_vm_vcenter_hostname:
+vmware_vc_add_vm_datacenter:
+vmware_vc_add_vm_cluster:
+vmware_vc_add_vm_vcenter_folder:
+vmware_vc_add_vm_name:
+vmware_vc_add_vm_guest_id:
+vmware_vc_add_vm_disk_size:
+vmware_vc_add_vm_datastore:
+vmware_vc_add_vm_ram_size:
+vmware_vc_add_vm_cpus:
+vmware_vc_add_vm_vlan_name:
+vmware_vc_add_vm_iso:

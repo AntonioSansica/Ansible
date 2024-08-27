@@ -1,0 +1,19 @@
+---
+
+- name: Install required packages
+  ansible.builtin.apt:
+    name:
+      - realmd
+      - sssd
+      - sssd-tools
+      - adcli
+      - oddjob
+      - oddjob-mkhomedir
+      - libpam-runtime
+      - python3-pexpect
+    state: present
+
+- name: Enable home directory
+  ansible.builtin.command: /bin/bash -c "/usr/sbin/pam-auth-update --enable mkhomedir"
+  register: home_folder
+  changed_when: home_folder != ""

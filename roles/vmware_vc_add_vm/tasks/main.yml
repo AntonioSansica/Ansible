@@ -1,0 +1,34 @@
+---
+
+- name: Create new VM
+  community.vmware.vmware_guest:
+    hostname: '{{ vmware_vc_add_vm_vcenter_hostname }}'
+    username: '{{ vmware_vc_add_vm_vcenter_username }}'
+    password: '{{ vmware_vc_add_vm_vcenter_password }}'
+    datacenter: '{{ vmware_vc_add_vm_datacenter }}'
+    cluster: '{{ vmware_vc_add_vm_cluster }}'
+    folder: '{{ vmware_vc_add_vm_vcenter_folder }}'
+    name: '{{ vmware_vc_add_vm_name }}'
+    state: poweredoff
+    guest_id: 'centos9_64Guest'
+    disk:
+      - size_gb: '{{ vmware_vc_add_vm_disk_size }}'
+        type: thin
+        datastore: '{{ vmware_vc_add_vm_datastore }}'
+    hardware:
+      memory_mb: '{{ vmware_vc_add_vm_ram_size }}'
+      num_cpus: '{{ vmware_vc_add_vm_cpus }}'
+      scsi: paravirtual
+    cdrom:
+      - controller_type: sata
+        controller_number: 0
+        unit_number: 0
+        state: present
+        type: iso
+        iso_path: '{{ vmware_vc_add_vm_iso }}'
+    networks:
+      - name: '{{ vmware_vc_add_vm_vlan_name }}'
+        device_type: vmxnet3
+        start_connected: true
+    validate_certs: false
+  delegate_to: localhost

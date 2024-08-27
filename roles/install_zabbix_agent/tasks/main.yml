@@ -1,0 +1,25 @@
+---
+
+- name: Move  debian installer to /tmp
+  ansible.builtin.import_tasks:
+    debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Move Cisco Secure Endpoint rhel installer to /tmp
+  ansible.builtin.import_tasks:
+    rhel.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Copy Zabbix agent2 config file
+  ansible.builtin.template:
+    src: zabbix_agent2.conf.j2
+    dest: /etc/zabbix/zabbix_agent2.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart zabbix-agent2
+  ansible.builtin.service:
+    name: zabbix-agent2.service
+    state: restarted
+    enabled: true

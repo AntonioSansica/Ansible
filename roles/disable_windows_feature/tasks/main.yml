@@ -1,0 +1,12 @@
+---
+
+- name: Disable Windows Feature
+  ansible.windows.win_shell: |
+    Disable-WindowsOptionalFeature -FeatureName {{ disable_windows_feature_name }} -Online -NoRestart
+  args:
+    executable: powershell
+  register: result
+
+- name: Showing result
+  ansible.builtin.debug:
+    var: result

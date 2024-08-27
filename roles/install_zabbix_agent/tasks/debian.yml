@@ -1,0 +1,25 @@
+---
+
+- name: Download Zabbix release package
+  ansible.builtin.get_url:
+    url: https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_7.0-2+debian12_all.deb
+    dest: /tmp/zabbix-release_7.0-2+debian12_all.deb
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Install Zabbix release package
+  ansible.builtin.apt:
+    deb: /tmp/zabbix-release_7.0-2+debian12_all.deb
+    state: present
+
+- name: Update apt package list
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install Zabbix agent2 and plugins
+  ansible.builtin.apt:
+    name:
+      - zabbix-agent2
+      - zabbix-agent2-plugin-*
+    state: present
