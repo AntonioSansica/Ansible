@@ -1,9 +1,5 @@
 ---
 
-- name: Load AD admin credentials
-  ansible.builtin.include_vars:
-     main.yml
-
 - name: Install required packages for Debian
   ansible.builtin.import_tasks:
      debian.yml
