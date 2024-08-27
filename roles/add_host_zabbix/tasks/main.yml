@@ -1,0 +1,30 @@
+---
+
+- name: Create a new host in Zabbix
+  delegate_to: "{{ add_host_zabbix_server_name }}"
+  community.zabbix.zabbix_host:
+    host_name: "{{ add_host_zabbix_hostname }}"
+    host_groups:
+      - "{{ add_host_zabbix_group }}"
+    link_templates:
+      - "{{ add_host_zabbix_template }}"
+    interfaces:
+      - type: 1
+        main: 1
+        useip: 1
+        ip: "{{ add_host_zabbix_ip }}"
+        dns: ""
+        port: "10050"
+    state: present
+
+
+## Add to the global playbook vars file
+
+# ansible_network_os: community.zabbix.zabbix
+# ansible_httpapi_port: 443
+# ansible_connection: httpapi
+# ansible_httpapi_use_ssl: true
+# ansible_httpapi_validate_certs: false
+# ansible_user: ""
+# ansible_httpapi_pass: ""
+# ansible_zabbix_url_path: ""

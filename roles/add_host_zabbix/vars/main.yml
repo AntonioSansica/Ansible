@@ -1,0 +1,5 @@
+add_host_zabbix_server_name: ""
+add_host_zabbix_hostname: ""
+add_host_zabbix_group: ""
+add_host_zabbix_template: ""
+add_host_zabbix_ip: ""
